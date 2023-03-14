@@ -29,33 +29,24 @@
 <body>
 
     <header>
+        <div class="container">
+            <div class="header-elements">
 
-        <?php
-        // if (function_exists('the_custom_logo')) {
-        //     the_custom_logo();
-        //     echo '<p>' . get_bloginfo('name') . '</p>';
-        // }
+                <?php
+                $logoImg = get_field('logo_image', 'options');
+                $logoTitleItalic = get_field('logo_title_italic_text', 'options');
+                $logoTitleNormal = get_field('logo_title_normal_text', 'options');
+                ?>
 
-        // $custom_logo_id = get_theme_mod( 'custom_logo' );
-        // $logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
-        // if ( has_custom_logo() ) {
-        // 	echo '<img src="' . esc_url( $logo[0] ) . '" alt="' . get_bloginfo( 'name' ) . '">';
-        // } else {
-        // 	echo '<h1>' . get_bloginfo('name') . '</h1>';
-        // }
+                <div class="logo">
+                    <img src="<?php echo esc_url($logoImg['url']); ?>" alt="<?php echo esc_attr($logoImg['alt']); ?>" title="<?php echo esc_url($logoImg['title']); ?>" />
+                    <p class="company-name"><span class="italic"> <?php echo $logoTitleItalic; ?></span> <?php echo $logoTitleNormal; ?> </p>
+                </div>
 
-        $logoImg = get_field('logo_image', 'options');
-        $logoTitle = get_field('logo_title', 'options');
-        // var_dump($logoImg);
-        ?>
-
-        <img src="<?php echo esc_url($logoImg['url']); ?>" alt="<?php echo esc_attr($logoImg['alt']); ?>" title="<?php echo esc_url($logoImg['title']); ?>" />
-        <p> <?php echo $logoTitle; ?> </p>
-
-
-
-        <?php
-        wp_nav_menu(array('theme_location' => 'header-menu'));
-        ?>
+                <?php
+                wp_nav_menu(array('theme_location' => 'header-menu'));
+                ?>
+            </div>
+        </div>
 
     </header>

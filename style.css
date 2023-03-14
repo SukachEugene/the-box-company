@@ -6,6 +6,72 @@ Version: 1.0
 
 */
 
+
+
+
+
+
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
+
+
+
+
+
+
+
+/* --------------- Some general rules -------------- */
+
 body {
     font-family: 'Work Sans', sans-serif;
     font-size: 16px;
@@ -17,6 +83,78 @@ body {
 
 }
 
+.container {
+    min-width: 84.46vw;
+    padding: 0 7.77vw;
+}
+
+.italic {
+    font-style: italic;
+}
+
+
+
+
+
+/* --------------- Header -------------- */
+
 header {
-    background-color: yellow;
+    background-color: white;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.header-elements {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    margin-right: 1vw;
+}
+
+.company-name {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 35px;
+    color: #2947A9;
+    display: flex;
+}
+
+.menu-header-menu-container {
+    display: flex;
+    align-items: center;
+}
+
+#menu-header-menu {
+    display: flex;
+    list-style-type: none; 
+    gap: 3.5vw 
+}
+
+#menu-header-menu a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21px;
+    color: #14171F;
+}
+
+#menu-header-menu li:last-child a {
+    color: #F9995D;
+} 
+
+
+
+/* --------------- FSection two -------------- */
+
+.section-two-content {
+    background-color: green;
+    padding: 60px 0;
 }
