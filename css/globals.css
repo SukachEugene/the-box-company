@@ -1,0 +1,59 @@
+body {
+    font-family: 'Work Sans', sans-serif;
+    /* font-size: 16px;
+    font-weight: 400;
+    line-height: 19px; */
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.italic {
+    font-style: italic;
+}
+
+:root {
+    --white: white;
+    --blue: #2947A9;
+    --black: #14171F;
+    --orange: #F9995D;
+    --grey: #292E3D;
+    --lightgray: #3D445C;
+    --smoke: #F6F8F7;
+}
+
+.orange {
+    color: var(--orange);
+}
+
+.black {
+    color: var(--black);
+}
+
+.blue {
+    color: var(--blue);
+}
+
+h2 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 42px;
+    color: var(--grey);
+    text-align: center;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23px;
+    color: var(--lightgray);
+}
+
+p {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23px;
+}
+
+a {
+    text-decoration: none;
+}
