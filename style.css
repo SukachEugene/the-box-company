@@ -29,6 +29,11 @@ Version: 1.0
     padding: 0 7.77vw;
 }
 
+.container-left {
+    padding-left: 7.77vw;
+    min-width: 92.23vw;
+}
+
 
 
 /* --------------- Header -------------- */
@@ -79,12 +84,110 @@ header {
     color: inherit;
 }
 
+#menu-header-menu a:hover {
+    text-decoration: underline;
+} 
+
+
+
+/* --------------- Section one -------------- */
+
+.slider-one-element {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 650px !important;
+    display: flex !important;
+    align-items: center;
+    position: relative;
+}
+
+.slider-one-element h1 {
+    max-width: 50%;
+}
+
+.slider-one-nav {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30vw;
+    background-color: var(--otherBlue);
+    color: var(--white);
+
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.slider-one-nav h3 {
+    color: var(--white);
+    padding: 20px 3.6vw;
+    text-align: center;
+}
+
+.slider-one-nav a {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+    margin: 0 3.6vw 26px 3.6vw;
+    text-align: center;
+    color: var(--white);
+}
+
+#slider-one-link:hover {
+    text-decoration: underline;
+
+}
+
+.slider-one-nav-buttons {
+    width: 100%;
+    display: flex;
+    
+}
+
+
+.slider-one-nav-button {
+    width: 50%;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21px;
+    color: var(--white);   
+    padding: 10px 0;
+    background-color: var(--grey);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.slider-one-nav-button:active {
+    background-color: var(--lightgray)
+}
+
+.slider-one-nav-buttons button:first-child {
+    border-right: 1px solid white;
+}
+
+.left-arrow {
+    margin-right: 0.7vw;
+}
+
+.right-arrow {
+    margin-left: 0.7vw;
+}
+
+
+
+
+
 
 
 /* --------------- Section two -------------- */
 
 .section-two {
-    background-color: green;
+    background-color: var(--white);
     padding: 60px 0 84px 0;
 }
 
@@ -221,6 +324,11 @@ header {
     padding: 38px 0;
 }
 
+.section-four-article:hover, .section-four-article:nth-child(2n):hover {
+    background-color: #2947a973;
+
+}
+
 .section-four-article h3 {
     color: var(--blue);
 }
@@ -228,6 +336,8 @@ header {
 .section-four-article:nth-child(2n) {
     background-color: var(--blue);
 }
+
+
 
 .section-four-article:nth-child(2n) h3 {
     color: var(--white);
@@ -244,4 +354,54 @@ header {
 
 .section-four-article img {
     width: 40px;
+}
+
+
+
+
+/* --------------- Section fsix -------------- */
+
+.section-six {
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 300px;
+}
+
+.section-six-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px 3.3vw 100px 0;
+}
+
+.section-six-content h3 {
+    /* padding-top: 100px; */
+    padding-bottom: 30px;
+    color: var(--white);
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 42px;
+}
+
+.section-six-content p {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+    color: var(--white);
+}
+
+.section-six-content a {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+    color: var(--white);
+}
+
+.section-six-button {
+    padding: 16px 1.4vw;
+    border: 2px solid var(--white);
+}
+
+.section-six-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }

@@ -12,6 +12,43 @@ add_action('wp_enqueue_scripts', 'style_files');
 
 
 
+
+// connect scripts, jQuery and slick slider library
+add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
+function my_theme_enqueue_styles() {
+	// Slick CSS & JS files
+	wp_register_style('slick-css', get_theme_file_uri() .'/css/slick.css');
+	wp_register_style('slick-theme-css', get_theme_file_uri() .'/css/slick-theme.css');
+  wp_enqueue_script('jquery', get_theme_file_uri() . '/js/scripts.js', array( 'jquery' ), '1.0.0', true );
+	wp_enqueue_script('slick-min-js', get_theme_file_uri().'/js/slick.min.js');		
+
+	// Our Custom JS (we'll initialize slick here)
+	wp_enqueue_script('scripts', get_template_directory_uri().'/js/scripts.js');
+
+	// Enqueue all CSS & JS files
+	wp_enqueue_style('slick-css');
+	wp_enqueue_style('slick-theme-css');
+  wp_enqueue_script('jquery');
+	wp_enqueue_script('slick-min-js');
+  wp_enqueue_script('scripts');
+}
+
+
+// // adding scripts to the WordPress Admin
+// function my_admin_scripts() {
+//   wp_enqueue_script( 'scripts', plugin_dir_url( __FILE__ ). '/js/scripts.js', array( 'jquery' ), '1.0.0', true );
+// }
+// add_action( 'admin_enqueue_scripts', 'my_admin_scripts' );
+
+
+
+
+
+
+
+
+
+
 // remove top mafrin by WP admin panel
 function remove_admin_login_header() {
   remove_action('wp_head', '_admin_bar_bump_cb');

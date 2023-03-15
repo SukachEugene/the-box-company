@@ -1,3 +1,8 @@
+html {
+    scroll-behavior: smooth;
+}
+
+
 body {
     font-family: 'Work Sans', sans-serif;
     /* font-size: 16px;
@@ -5,15 +10,28 @@ body {
     line-height: 19px; */
     letter-spacing: 0em;
     text-align: left;
+
+    margin:0%;
+    padding:0%;
+    overflow-x: hidden;
 }
 
 .italic {
     font-style: italic;
 }
 
+.underlined {
+    text-decoration: underline;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
 :root {
     --white: white;
     --blue: #2947A9;
+    --otherBlue: #3559C7;
     --black: #14171F;
     --orange: #F9995D;
     --grey: #292E3D;
@@ -31,6 +49,13 @@ body {
 
 .blue {
     color: var(--blue);
+}
+
+h1 {
+    font-size: 72px;
+    font-weight: 600;
+    line-height: 84px;
+    color: var(--grey);
 }
 
 h2 {

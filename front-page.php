@@ -2,11 +2,61 @@
 get_header()
 ?>
 
-<section>
 
+<section class="section-one">
+
+    <div class="slider-one">
+
+        <?php
+        $featured_posts = get_field('projects_show_in_top');
+        $mainTitle = get_field('projects_title');
+
+        if ($featured_posts) {
+
+            foreach ($featured_posts as $post) {
+
+                $title = get_the_title();
+                $image = get_field('image');
+                $slogan = get_field('slogan');
+        ?>
+                <div class="slider-one-element" data-title="<?php echo $title ?>" data-link="<?php the_permalink() ?>" style="background-image: url('<?php echo $image['url']; ?>');>">
+
+                    <div class="container-left">
+
+                        <div class="slider-one-element-content">
+
+                            <h1> <?php echo $slogan ?> </h1>
+
+                        </div>
+                    </div>
+                </div>
+
+            <?php } ?>
+
+        <?php
+            wp_reset_postdata();
+        }
+        ?>
+
+        <div class="slider-one-nav">
+            <h3><?php echo $mainTitle ?></h3>
+            <a id="slider-one-link" href=""></a>
+            <div class="slider-one-nav-buttons">
+                <button class="slider-one-nav-button pointer slide-prev slick-arrow" aria-label="Previous" type="button" style="">
+                    <img class="left-arrow" src="<?php echo get_theme_file_uri() . '/images/left_arrow.svg' ?>" title="" alt="">
+                    <span>Back</span>
+                </button>
+                <button class="slider-one-nav-button pointer slide-next slick-arrow" aria-label="Next" type="button" style="">
+                    <span>Next</span>
+                    <img class="right-arrow" src="<?php echo get_theme_file_uri() . '/images/right_arrow.svg' ?>" title="" alt="">
+                </button>
+            </div>
+        </div>
+
+    </div>
 </section>
 
-<section class="section-two">
+<section class="section-two" id="consultation-form">
     <div class="container">
         <div class="section-two-content">
 
@@ -113,7 +163,10 @@ get_header()
 
 </section>
 
-<section class="section-six">
+<?php
+$banner = get_field('consultation_banner');
+?>
+<section class="section-six" style="background-image: url('<?php echo $banner['url']; ?>');">
     <div class="container">
         <div class="section-six-content">
             <div>
@@ -125,9 +178,9 @@ get_header()
                 ?>
 
                 <h3><?php echo $title ?></h3>
-                <p><?php echo $text ?> <a href="tel:+<?php echo preg_replace('~\D~', '', $phoneNumber); ?>"><?php echo $phoneNumber ?></a></p>
+                <p><?php echo $text ?> <a class="underlined" href="tel:+<?php echo preg_replace('~\D~', '', $phoneNumber); ?>"><?php echo $phoneNumber ?></a></p>
             </div>
-            <a>Button</a>
+            <a class="section-six-button pointer" href="#consultation-form"><?php echo $link['title']; ?></a>
 
         </div>
     </div>
