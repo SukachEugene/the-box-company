@@ -153,13 +153,60 @@ get_header()
                 wp_reset_postdata();
                 ?>
 
-
             </div>
         </div>
     </div>
 </section>
 
-<section>
+<section class="section-five">
+
+    <div class="container">
+
+        <div class="section-five-content">
+
+            <?php $field = get_field('our_goals'); ?>
+
+            <div class="section-five-goals-container">
+
+                <?php foreach ($field as $value) : ?>
+
+                    <?php
+                    $image = $value['image'];
+                    $number = $value['number'];
+                    $description = $value['text'];
+                    $position = $value['icon_position'];
+                    ?>
+
+                    <div class="section-five-article">
+                        <img class="<?php echo $position ?>" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" title="<?php echo $image['title']; ?>">
+                        <div class="section-five-article-text">
+                            <h3><?php echo $number ?></h3>
+                            <p><?php echo $description ?></p>
+                        </div>
+                    </div>
+
+                <?php endforeach; ?>
+            </div>
+
+
+            <div class="section-five-text-container">
+                <?php
+                $title = get_field('goals_title');
+                $text = get_field('goals_text');
+                $link = get_field('goals_link');
+                ?>
+
+                <h3> <?php echo $title; ?> </h3>
+                <p> <?php echo $text; ?> </p>
+                <a href="<?php echo esc_url($link['url']); ?>" target="<?php echo esc_attr($link['target']); ?>"> <?php echo $link['title']; ?> </a>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
 
 </section>
 
@@ -186,6 +233,45 @@ $banner = get_field('consultation_banner');
     </div>
 </section>
 
+<section>
+
+</section>
+
+<section class="section-eight">
+
+    <div class="container">
+        <div class="section-eight-content">
+            <?php
+            $title = get_field('contact_title');
+            $description = get_field('contact_description');
+            $form = get_field('contact_form');
+            ?>
+
+            <h2> <?php echo $title ?></h2>
+
+            <p class="section-eight-description"> <?php echo $description ?> </p>
+            <div class="section-eight-form-container">
+                <?php
+                echo do_shortcode($form);
+                ?>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<?php
+$social_media = get_field('social_media_links', 'options');
+
+foreach ($social_media as $media) :
+
+    $name = $media['name'];
+    echo ($name);
+?>
+
+
+
+<?php endforeach; ?>
 
 
 
