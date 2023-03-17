@@ -56,7 +56,7 @@ get_header()
     </div>
 </section>
 
-<section class="section-two" id="consultation-form">
+<section class="section-two">
     <div class="container">
         <div class="section-two-content">
 
@@ -138,7 +138,7 @@ get_header()
 
                     $services->the_post();
 
-                    $post_id = get_the_ID();
+                    // $post_id = get_the_ID();
                     $image = get_field('image');
                 ?>
 
@@ -185,7 +185,8 @@ get_header()
                         </div>
                     </div>
 
-                <?php endforeach; ?>
+                <?php endforeach;
+                ?>
             </div>
 
 
@@ -233,14 +234,126 @@ $banner = get_field('consultation_banner');
     </div>
 </section>
 
-<section>
+<section class="section-seven">
+    <div class="container">
 
+
+        <?php
+        $title = get_field('all_projects_title');
+        ?>
+
+        <h2> <?php echo $title ?></h2>
+
+        <div class="section-seven-content">
+
+            <div class="projects-block-filters-container">
+
+                <p class="filter-name all">All</p>
+
+                <?php
+
+                $args = array(
+                    'post type' => 'projects',
+                    'hide_empty' => '1',
+                    'orderby' => 'description',
+                    'order'   => 'ASC'
+                );
+
+                $categories = get_categories($args);
+
+                foreach ($categories as $category) :
+                    $name = $category->name;
+                    $slug = $category->slug;
+
+                ?>
+
+                    <p class="filter-name<?php echo (" " . $slug) ?>"><?php echo $name ?></p>
+
+                <?php endforeach ?>
+
+            </div>
+
+            <div class="projects-block-elements-container">
+
+                <div class="slider-two projects-block-slides-container">
+
+                    <?php
+
+                    $args = array(
+                        'post_type' => 'projects',
+                        'posts_per_page' => -1,
+                        // 'orderby' => 'menu_order',
+                        'order' => 'ASC'
+                    );
+
+                    $projects = new WP_Query($args);
+
+                    while ($projects->have_posts()) {
+
+                        $projects->the_post();
+
+                        $location = get_field('location');
+                        $title = get_the_title();
+                        $post_categories = get_the_category();
+
+
+                        if (has_post_thumbnail()) : ?>
+
+                            <?php
+
+                            $slugs = '';
+
+                            foreach ($post_categories as $category) {
+                                $slug = $category->slug;
+                                $slugs .= " ";
+                                $slugs .= $slug;
+                            }
+                            ?>
+
+                            <div class="projects-block-element<?php echo $slugs ?>">
+                                <div class="projects-block-element-image">
+                                    <?php the_post_thumbnail(); ?>
+                                </div>
+                                <div class="projects-block-element-description">
+                                    <h4><?php echo $title ?></h4>
+                                    <p><?php echo $location ?></p>
+
+                                </div>
+                            </div>
+
+
+                        <?php endif ?>
+                    <?php
+                    }
+                    wp_reset_postdata();
+                    ?>
+
+                </div>
+
+
+
+                <div class="slider-two-nav-buttons">
+                    <button class="slider-two-nav-button pointer slide-prev2 slick-arrow" aria-label="Previous" type="button" style="">
+                        <img class="left-arrow" src="<?php echo get_theme_file_uri() . '/images/left_arrow.svg' ?>" title="" alt="">
+                        <span>Back</span>
+                    </button>
+                    <button class="slider-two-nav-button pointer slide-next2 slick-arrow" aria-label="Next" type="button" style="">
+                        <span>Next</span>
+                        <img class="right-arrow" src="<?php echo get_theme_file_uri() . '/images/right_arrow.svg' ?>" title="" alt="">
+                    </button>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
 </section>
 
 <section class="section-eight">
 
     <div class="container">
-        <div class="section-eight-content">
+        <div class="section-eight-content" id="consultation-form">
             <?php
             $title = get_field('contact_title');
             $description = get_field('contact_description');
@@ -259,19 +372,6 @@ $banner = get_field('consultation_banner');
     </div>
 
 </section>
-
-<?php
-$social_media = get_field('social_media_links', 'options');
-
-foreach ($social_media as $media) :
-
-    $name = $media['name'];
-    echo ($name);
-?>
-
-
-
-<?php endforeach; ?>
 
 
 
