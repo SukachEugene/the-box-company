@@ -248,7 +248,7 @@ $banner = get_field('consultation_banner');
 
             <div class="projects-block-filters-container">
 
-                <p class="filter-name all">All</p>
+                <p class="filter-name" data-filter="all">All</p>
 
                 <?php
 
@@ -267,7 +267,7 @@ $banner = get_field('consultation_banner');
 
                 ?>
 
-                    <p class="filter-name<?php echo (" " . $slug) ?>"><?php echo $name ?></p>
+                    <p class="filter-name" data-filter="<?php echo ($slug) ?>"><?php echo $name ?></p>
 
                 <?php endforeach ?>
 
@@ -305,12 +305,17 @@ $banner = get_field('consultation_banner');
 
                             foreach ($post_categories as $category) {
                                 $slug = $category->slug;
-                                $slugs .= " ";
-                                $slugs .= $slug;
+
+                                if ($category == $post_categories[0]) {
+                                    $slugs .= $slug;
+                                } else {
+                                    $slugs .= " ";
+                                    $slugs .= $slug;
+                                }
                             }
                             ?>
 
-                            <div class="projects-block-element<?php echo $slugs ?>">
+                            <div class="projects-block-element <?php echo $slugs ?>" data-filter="<?php echo $slugs ?>">
                                 <div class="projects-block-element-image">
                                     <?php the_post_thumbnail(); ?>
                                 </div>

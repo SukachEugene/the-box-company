@@ -66,96 +66,189 @@ jQuery(document).ready(function ($) {
 })
 
 
-jQuery(document).ready(function ($) {
+// jQuery(document).ready(function ($) {
 
-    $('.slider-two').slick({
+//     const SLICK_SETTINGS = {
+//         dots: true,
+//         arrows: false,
+//         slidesPerRow: 2,
+//         rows: 2,
+//         slidesToScroll: 1,
+//     }
+
+
+//     $('.slider-two').slick(SLICK_SETTINGS);
+
+
+//     $('.slide-prev2').click(function (e) {
+//         $('.slider-two').slick('slickPrev');
+//     });
+
+//     $('.slide-next2').click(function (e) {
+//         $('.slider-two').slick('slickNext');
+//     })
+
+
+
+//     $('.filter-name').on('click', function (event) {
+
+
+        
+//         let activeFilter = event.target
+//         let activeFilterValue = activeFilter.dataset.filter;
+//         let slidesArray = document.getElementsByClassName('projects-block-element');
+
+//         if (activeFilterValue == 'all') {
+
+//             $('.slider-two')[0].slick.refresh();
+           
+//             for (i = 0; i < slidesArray.length; i++) {
+//                 slidesArray[i].style.display = 'inline-block';
+//             }
+//         } else {
+
+
+//             $('.slider-two')[0].slick.refresh();
+
+             
+//             for (i = 0; i < slidesArray.length; i++) {
+//                 let slideFilters= slidesArray[i].dataset.filter;
+//                 let slideFiltersValues = slideFilters.split(' ');
+//                 let flag = false;
+
+
+
+//                 for (j = 0; j < slideFiltersValues.length; j++) {
+//                     if (activeFilterValue[0] == slideFiltersValues[j]) {
+
+//                         flag = true;
+//                         break;
+//                     }
+//                 }
+
+//                 if (flag == false) {
+//                     slidesArray[i].style.display = 'none';
+//                 }
+//             }
+
+        
+
+            
+//         }
+
+
+//     });
+
+
+// })
+
+
+
+jQuery(document).ready(function($) {
+	$('.slider-two').slickFilterable({
+    	filterName: 'filter',
+      filter: function( category, slider, settings ) {
+      	return $(this).hasClass( category );
+      },
+    	slick: {
         dots: true,
         arrows: false,
         slidesPerRow: 2,
         rows: 2,
         slidesToScroll: 1,
-    });
-
-
-    $('.slide-prev2').click(function (e) {
-        $('.slider-two').slick('slickPrev');
-    });
-
-    $('.slide-next2').click(function (e) {
-        $('.slider-two').slick('slickNext');
-    })
-
-
-    // let filters = document.getElementsByClassName('filter-name');
-    // let filtersArray = [];
-    // for (i = 0; i < filters.length; i++) {
-    //     let element = filters[i].className;
-    //     filtersArray.push(element);
-    // }
-
-    // console.log(filtersArray)
-
-
-    $('.filter-name').on('click', function (event) {
-        
-        let element = event.target
-        let elementClass = element.className;
-        let atributes = elementClass.split(' ');
-
-        let index = atributes.indexOf('filter-name');
-        if (index !== -1) {
-            atributes.splice(index, 1);
         }
-        
+	});
+});
 
-        let slidesArray = document.getElementsByClassName('projects-block-element');
+(function( $ ) {
+    $.fn.slickFilterable = function( options ) {
 
-        for(i = 0; i < slidesArray.length; i++) {
-            let slideClass = slidesArray[i].className;
-            let slideAtributes = slideClass.split(' ');
+        /**
+         * A plugin to create a slick we can filter.
+         *
+         * If you are not using Rows you can use slickFilter
+         * (check documentation) otherwise we can provide a valid filter.
+         *
+         * options {
+         *      slideSelector    string     jQuery selector to get slides. Imetiate children by default.
+         *      filterName       string     We will search for data-{filterName} clickable elements.
+         *      slick            object     The slick settings. Check Slick doc.
+         *      beforeFilter     function   A fuction called before filter slider. Receives the trigger element
+         *                                  as this and 3 params: category (string), slider and slides (jQuery objects).
+         *      filter           mix        A valid parameter to jQuery filter() function. If it's a functio we will wrap
+         *                                  it and it receives the trigger element as this and 3 params: category (string),
+         *                                  slider (jQuery object) and a copy of settings (extended).
+         * }
+         */
+        let settings = $.extend({
+            slideSelector: '> *',
+            filterName: 'filter',
+            slick: {},
+            beforeFilter: function() {},
+            filter: function( element, category, slider, settings ) { return true; },
+        }, options );
 
-            slidesArray[i].style.display = "none";
+        return this.each(function() {
+            let slider = $(this),
+                slides = slider.find( settings.slideSelector ),
+                slickObj;
 
-            for(j = 0; j < slideAtributes.length; j++) {
-                for (k = 0; k < atributes.length; k++) {
-                    if (slideAtributes[j] == atributes[k]) {
-                        slidesArray[i].style.display = 'inline-block';
-        
-                    }
+            /**
+             * Create Slick
+             *
+             * TIP: you should you 'slidesPerRow' instead 'slidesToShow' in grid mode (with rows)
+             * to avoid slick break layout when there are less slides than on "page".
+             */
+            slickObj = slider.slick( settings.slick );
+
+            // Handle Filter Click
+            $('[data-' + settings.filterName + ']').on('click', function(event) {
+                
+                event.preventDefault();
+
+                let category = $(this).data(settings.filterName),
+                    newSlides = $.extend(true, {}, slides),
+                    newSlickOptions;
+
+                if ( ! category ) return;
+
+                // Before Filter Slides
+                if ( typeof settings.beforeFilter == 'function' ) {
+                    settings.beforeFilter.call(this, category, slider, slides);
                 }
-            }
-        }
 
-        $('.slider-two').slick({
-            dots: true,
-            arrows: false,
-            slidesPerRow: 2,
-            rows: 2,
-            slidesToScroll: 1,
+                // Destroy and empty
+                slider.slick('unslick');
+
+                // Recreate All Slides
+                if ( category === 'all' ) {
+                    slider.find( settings.slideSelector ).remove();
+                    slider.append( newSlides );
+                    slider.slick( settings.slick );
+
+                    return;
+                }
+
+                /**
+                 * Filter Slides
+                 *
+                 * If settings.filter is a function we pass the category, slider and a copy of settings
+                 * expecting a true or false return to pass it to jQuery.filter();
+                 *
+                 * If not, we just pass it directly.
+                 */
+                if ( typeof settings.filter !== 'function' ) {
+                    newSlides = newSlides.filter( settings.filter );
+                } else {
+                    newSlides = newSlides.filter( function() {
+                        return settings.filter.call( this, category, slider, $.extend( true, {}, settings ) );
+                    } );
+                }
+
+                slider.find( settings.slideSelector ).remove();
+                slider.append( newSlides );
+                slider.slick( settings.slick );
+            });
         });
-    
-
-
-
-
-    });
-
-    // filters.forEach(element => {
-    //     console.log(element);
-    // });
-
-    // var filtered = false;
-
-    // $('.js-filter').on('click', function () {
-    //     if (filtered === false) {
-    //         $('.filtering').slick('slickFilter', ':even');
-    //         $(this).text('Unfilter Slides');
-    //         filtered = true;
-    //     } else {
-    //         $('.filtering').slick('slickUnfilter');
-    //         $(this).text('Filter Slides');
-    //         filtered = false;
-    //     }
-    // });
-
-})
+    };
+}(jQuery));
