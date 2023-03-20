@@ -1,1 +1,1 @@
-<h1>My new header</h1>
+<h1>My new header in index.php</h1>
