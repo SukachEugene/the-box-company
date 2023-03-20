@@ -20,7 +20,9 @@ function my_theme_enqueue_files(){
   wp_enqueue_script('font-awesome-kit', 'https://kit.fontawesome.com/3f554732dc.js', [], null );
 
 	 // custom scripts file/files
+  wp_enqueue_script('jquery-scripts', get_template_directory_uri().'/js/jquery-scripts.js');
   wp_enqueue_script('scripts', get_template_directory_uri().'/js/scripts.js');
+ 
 }
 
 
@@ -43,6 +45,12 @@ function register_my_menu() {
   register_nav_menu('header-menu',__( 'Header Menu' ));
 }
 
+add_action( 'init', 'register_my_mobil_menu' );
+
+function register_my_mobil_menu() {
+  register_nav_menu('mobil-menu',__( 'Mobil Menu' ));
+}
+
 
 
 
@@ -52,6 +60,9 @@ add_filter("use_block_editor_for_post_type", "disable_gutenberg_editor");
 function disable_gutenberg_editor() {
   return false;
 }
+
+/* Disable WordPress Admin Bar for all users */
+add_filter( 'show_admin_bar', '__return_false' );
 
 
 

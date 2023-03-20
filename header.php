@@ -27,7 +27,7 @@
 
     <!-- <script src="https://kit.fontawesome.com/3f554732dc.js" crossorigin="anonymous"></script> -->
 
-    <?php do_action ('wp_head') ?>
+    <?php do_action('wp_head') ?>
 </head>
 
 <body>
@@ -47,12 +47,36 @@
                     <p class="company-name"><span class="italic"> <?php echo $logoTitleItalic; ?></span> <?php echo $logoTitleNormal; ?> </p>
                 </div>
 
+
                 <?php
                 wp_nav_menu(array('theme_location' => 'header-menu'));
                 ?>
+
+
+                <div class="burger-menu">
+                    <button id="open-main-nav">
+                        <i class="fa-sharp fa-solid fa-bars pointer"></i>
+                    </button>
+                    <button id="close-main-nav" class="hide">
+                        <i class="fa-solid fa-xmark pointer"></i>
+                    </button>
+
+                    <div class="nav-menu hide" id="main-nav-links">
+                        <div class="nav-menu-mobile-style">
+
+                            <?php
+                            wp_nav_menu(array('theme_location' => 'mobil-menu'));
+                            ?>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
             </div>
 
-            
+
         </div>
 
     </header>

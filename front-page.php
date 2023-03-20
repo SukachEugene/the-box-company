@@ -248,7 +248,7 @@ $banner = get_field('consultation_banner');
 
             <div class="projects-block-filters-container">
 
-                <p class="filter-name" data-filter="all">All</p>
+                <p class="filter-name active" data-filter="all">All</p>
 
                 <?php
 
