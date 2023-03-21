@@ -33,7 +33,7 @@ function addEventListeners() {
     slideFilters[i].addEventListener('click', stylingSlideFilters, false);
   }
 
- document.getElementById('form-one-selector').addEventListener('change', selectPlaceholderStyling, false);;
+  document.getElementById('form-one-selector').addEventListener('change', selectPlaceholderStyling, false);;
 
 }
 
@@ -77,13 +77,26 @@ function selectPlaceholderStyling() {
 
 // ---------- Animation -------------
 
-document.addEventListener('DOMContentLoaded', function() {
-  let counter = document.getElementsByClassName('section-five-article').length;
+document.addEventListener('DOMContentLoaded', function () {
+  let elements = document.getElementsByClassName('section-five-article');
 
   createFirstElementAnimationOfGoals();
-  setInterval(function() {
-    createAnimationOfGoals(counter);
+  let animation = setInterval(function () {
+    createAnimationOfGoals();
   }, 1000);
+
+
+  let container = document.getElementsByClassName('section-five-goals-container');
+
+  container[0].addEventListener('mouseover', function () {
+    clearInterval(animation);
+  })
+
+  container[0].addEventListener('mouseout', function () {
+    animation = setInterval(function () {
+      createAnimationOfGoals();
+    }, 1000);
+  });
 
 });
 
@@ -93,24 +106,29 @@ function createFirstElementAnimationOfGoals() {
   elements[0].classList.add("animation-style");
 }
 
-function createAnimationOfGoals(num) {
+function createAnimationOfGoals() {
   let elements = document.getElementsByClassName('section-five-article');
   let currentPosition
+
+  let flag = false;
 
   for (i = 0; i < elements.length; i++) {
     if (elements[i].classList.contains("animation-style")) {
       currentPosition = i;
+      flag = true;
     }
   }
 
-  elements[currentPosition].classList.remove("animation-style");
+  if (flag) {
+    elements[currentPosition].classList.remove("animation-style");
 
-  let nextPosition = currentPosition + 1;
+    let nextPosition = currentPosition + 1;
 
-  if (nextPosition == elements.length) {
-    nextPosition = 0;
+    if (nextPosition == elements.length) {
+      nextPosition = 0;
+    }
+
+    elements[nextPosition].classList.add("animation-style");
   }
-
-  elements[nextPosition].classList.add("animation-style");
 
 }
