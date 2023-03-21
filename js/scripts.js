@@ -1,6 +1,5 @@
 
 
-
 function menuSwitch() {
   console.log('test')
 
