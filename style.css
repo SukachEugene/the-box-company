@@ -53,6 +53,7 @@ header {
     min-height: 80px;
     display: flex;
     align-items: center;
+    
 }
 
 .header-elements {
@@ -290,6 +291,10 @@ header {
 
 
 /* --------------- Section three -------------- */
+
+.section-three {
+    padding-top: 74px;
+}
 
 .section-three-content {
     /* position: relative; */
@@ -655,7 +660,8 @@ header {
 
 .projects-block-element {
     width: 26.6vw !important;
-    height: 300px;
+    height: 300px !important;
+    position: relative;
 }
 
 .projects-block-element:nth-child(even) {
@@ -665,9 +671,12 @@ header {
 
 .projects-block-element-image img {
     width: 100% !important;
-    max-height: 250px;
+    height: 100%;
+    /* max-height: 250px;
     height: 200px;
-    overflow: hidden;
+    overflow: hidden; */
+    position: absolute;
+    z-index: 1;
 
 }
 
@@ -675,7 +684,10 @@ header {
     background-color: var(--blue);
     color: var(--white);
     width: 100%;
-    height: 100px;
+    /* height: 100px; */
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
 }
 
 .projects-block-element-description h4 {
@@ -730,8 +742,6 @@ header {
     width: 100%;
     display: flex;
     justify-content: space-between;
-
-
 }
 
 .slider-two-nav-button {
@@ -765,16 +775,6 @@ header {
 .right-arrow {
     margin-left: 0.7vw;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -832,9 +832,32 @@ header {
     border: 1px solid #E0E3EB;
 }
 
+.one-column-element:focus, .two-column-element:focus, .subscribe-form-email-input:focus {
+    outline: 2px solid var(--blue);
+}
+
+#form-one-selector option {
+    color: black;
+    font-size: 18px;
+}
+
+#form-one-selector:first-child {
+    color: #A3AAC2;
+    font-size: 18px;
+}
+
+
+#form-one-selector option:first-child {
+    display: none;
+}
+
+#form-one-selector {
+    max-width: 100%;
+}
+
 .one-column-element::placeholder,
 .two-column-element::placeholder {
-    color: #c1c2a3;
+    color: #A3AAC2;
 }
 
 .two-column-element {
@@ -897,6 +920,10 @@ header {
     appearance: none;
 }
 
+.wpcf7-response-output {
+    display: none !important;
+}
+
 
 
 
@@ -910,7 +937,8 @@ header {
 }
 
 .footer-left-part {
-    width: 60%;
+    width: 55%;
+    padding-right: 5%;
 }
 
 .footer-left-part a:hover {
@@ -1127,6 +1155,47 @@ header {
         padding-left: 10%;
         padding-right: 10%;
     }
+
+    .footer-subscribe-form input {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .footer-subscribe-form .subscribe-submit {
+        min-width: min-content;
+    }
+
+    .section-seven-content {
+        flex-direction: column;
+    }
+
+    .projects-block-filters-container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 20px;
+    }
+
+    .projects-block-elements-container {
+        width: 100%;
+    }
+
+    .projects-block-element {
+        width: 40vw !important;
+    }
+
+    .projects-block-element:nth-child(even) {
+        margin-left: 4.4vw;
+       
+    }
+
+    .projects-block-element {
+        margin-top: 4.4vw;
+    }
+
+    .slick-dots {
+        left: 41.4%;
+    }
     
 }
 
@@ -1246,8 +1315,6 @@ header {
         text-align: center;
     }
 
-
-
     .form-one-row p {
         flex-direction: column;
     }
@@ -1256,9 +1323,52 @@ header {
         min-width: 100%;
     }
 
+    .footer-elements {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-left-part {
+        width: 80%;
+        padding-right: 0;
+    }
+
+    .footer-right-part {
+        width: 80%;
+        margin-top: 30px;
+    }
+
+    .footer-subscribe-form {
+        /* margin-bottom: 32px; */
+    }
+
+    .footer-subscribe-form input {
+        width: 50vw;
+    }
+
     .contact-form .submit {
         width: 30vw;
         min-width: 200px;
+    }
+
+    .projects-block-filters-container {
+        justify-content: center;
+    }
+
+    .projects-block-element {
+        width: 85vw !important;
+    }
+
+    .projects-block-element {
+        height: 60vw !important;
+    }
+
+    .slider-two-nav-buttons {
+        margin-top: 4.4vw;
+    }
+
+    .slider-two-nav-button {
+        width: 50%;
     }
 }
 
@@ -1330,8 +1440,38 @@ header {
         justify-content: left;
     }
 
+    .section-six-content a {
+        display: block;
+    }
+
 
     
+}
+
+@media screen and (max-width: 500px) {
+
+    .footer-caption {
+        font-size: 18px;
+    }
+
+    .footer-caption-fix {
+        min-width: min-content;
+        padding-right: 8px;
+    }
+
+    .footer-subscribe-form-row {
+        flex-direction: column;
+    }
+
+    .footer-subscribe-form input {
+        width: 100%;
+        text-align: center;
+    }
+
+    .footer-subscribe-form .subscribe-submit {
+        width: 100%;
+    }
+
 }
 
 
@@ -1368,5 +1508,21 @@ header {
 
     .section-five-text-container a {
         min-width: 50vw;
+    }
+
+    .footer-caption a {
+        display: block;
+    }
+
+    .filter-name {
+        font-size: 20px;
+    }
+
+    .projects-block-element-description h4 {
+        font-size: 18px;
+    }
+
+    .projects-block-element-description p {
+        font-size: 14px;
     }
 }

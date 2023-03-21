@@ -74,7 +74,6 @@ if( function_exists('acf_add_options_page') ) {
 
 
 
-
 // filter for download .svg files from: https://github.com/WordPress/gutenberg/issues/22861
 add_filter( 'upload_mimes', function() {
   $mimes = [
@@ -86,13 +85,19 @@ add_filter( 'upload_mimes', function() {
 });
 
 
-// add_post_type_support( 'projects', 'post-thumbnails' );
-// add_theme_support( 'post-thumbnails' );
-// add_theme_support('post-thumbnails');
-// add_post_type_support( 'projects', 'thumbnail' );  
-
+// turn on post's thumbnails
 add_action('after_setup_theme', 'theme_features');
 
 function theme_features(){
   add_theme_support('post-thumbnails');
 }
+
+
+// add_filter( 'wpcf7_validate_select*', 'skip_select_validation', 10, 2 );
+// function skip_select_validation( $result, $tag ) {
+//     $name = $tag->name;
+//     if ( 'form-name' === $name ) {
+//         $result->skip_select_validation = true;
+//     }
+//     return $result;
+// }

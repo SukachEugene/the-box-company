@@ -54,6 +54,7 @@ jQuery(document).ready(function ($) {
 
 
 
+// Base of this code from: https://jsfiddle.net/mariovalney/L8b2d0ox
 
 jQuery(document).ready(function ($) {
     $('.slider-two').slickFilterable({
@@ -70,7 +71,18 @@ jQuery(document).ready(function ($) {
             slidesToScroll: 1,
             // touchMove: false,
             swipe: false,
+            responsive: [
+                {
+                  breakpoint: 800,
+                  settings: {
+                    touchMove: true,
+                    slidesPerRow: 1,
+                    dots: false,
+                  }
+                }
+              ]
         }
+        
     });
 
 
@@ -106,23 +118,6 @@ jQuery(document).ready(function ($) {
             $('[data-' + settings.filterName + ']').on('click', function (event) {
 
                 event.preventDefault();
-
-
-                if (this.classList.contains("filter-name")) {
-
-                  if (this.classList.contains("active")) {
-                    this.classList.remove('active');
-                    this.querySelector('.active').classList.remove('active');
-
-                  } else {
-                    elements = document.querySelectorAll('.active');
-                    elements.forEach((element) => {
-                      element.classList.remove('active');
-                    });
-
-                    this.classList.add('active');
-                  }
-                }
 
                 let category = $(this).data(settings.filterName),
                     newSlides = $.extend(true, {}, slides),
@@ -163,3 +158,4 @@ jQuery(document).ready(function ($) {
         });
     };
 }(jQuery));
+
