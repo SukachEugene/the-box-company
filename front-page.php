@@ -3,7 +3,7 @@ get_header()
 ?>
 
 
-<section class="section-one">
+<section class="section-one" id="home">
 
     <div class="slider-one">
 
@@ -92,7 +92,7 @@ get_header()
 </section>
 
 
-<section class="section-three">
+<section class="section-three" id="about-us">
     <div class="container">
         <div class="section-three-content">
             <?php
@@ -114,7 +114,7 @@ get_header()
     </div>
 </section>
 
-<section class="section-four">
+<section class="section-four" id="services">
     <div class="container">
         <div class="section-four-content">
             <?php
@@ -234,7 +234,7 @@ $banner = get_field('consultation_banner');
     </div>
 </section>
 
-<section class="section-seven">
+<section class="section-seven" id="projects">
     <div class="container">
 
 
@@ -383,3 +383,4 @@ $banner = get_field('consultation_banner');
 <?php
 get_footer();
 ?>
+
