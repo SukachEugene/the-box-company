@@ -62,3 +62,55 @@ function selectPlaceholderStyling() {
   let selector = document.getElementById('form-one-selector');
   selector.style.color = "black";
 }
+
+
+// document.ready = defeatNumberofElementsByClass('section-five-article');
+
+// function defeatNumberofElementsByClass(className) {
+//   let elements = document.getElementsByClassName(className);
+//   console.log(elements.length)
+//   return elements.length;
+// }
+
+
+
+
+// ---------- Animation -------------
+
+document.addEventListener('DOMContentLoaded', function() {
+  let counter = document.getElementsByClassName('section-five-article').length;
+
+  createFirstElementAnimationOfGoals();
+  setInterval(function() {
+    createAnimationOfGoals(counter);
+  }, 1000);
+
+});
+
+
+function createFirstElementAnimationOfGoals() {
+  let elements = document.getElementsByClassName('section-five-article');
+  elements[0].classList.add("animation-style");
+}
+
+function createAnimationOfGoals(num) {
+  let elements = document.getElementsByClassName('section-five-article');
+  let currentPosition
+
+  for (i = 0; i < elements.length; i++) {
+    if (elements[i].classList.contains("animation-style")) {
+      currentPosition = i;
+    }
+  }
+
+  elements[currentPosition].classList.remove("animation-style");
+
+  let nextPosition = currentPosition + 1;
+
+  if (nextPosition == elements.length) {
+    nextPosition = 0;
+  }
+
+  elements[nextPosition].classList.add("animation-style");
+
+}

@@ -1497,3 +1497,22 @@ header {
         font-size: 14px;
     }
 }
+
+
+
+/* --------------- Animation -------------- */
+
+.animation-style img {
+    transform: scale(1.2);
+}
+
+.animation-style h3 {
+    color: var(--blue);
+    text-shadow: 5px 5px 10px var(--grey);
+}
+
+.animation-style p {
+    color: var(--grey);
+    font-weight: 600;
+    text-shadow: 5px 5px 10px var(--grey);
+}
