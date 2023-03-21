@@ -432,7 +432,7 @@ header {
     flex-direction: column;
     row-gap: -100px;
     align-items: center;
-    padding: 122px 0 99px 10%;
+    margin: 122px 0 99px 10%;
 }
 
 .section-five-article {
@@ -506,7 +506,6 @@ header {
     font-weight: 700;
     line-height: 70px;
     color: var(--blue);
-    text-align: center;
 }
 
 .section-five-text-container p {
@@ -1174,6 +1173,10 @@ header {
     .slick-dots {
         left: 41.4%;
     }
+
+    .section-five-text-container h3 {
+        text-align: center;
+    }
     
 }
 
@@ -1501,6 +1504,10 @@ header {
 
 
 /* --------------- Animation -------------- */
+
+.section-five-goals-container {
+    cursor: crosshair;
+}
 
 .animation-style img {
     transform: scale(1.2);
