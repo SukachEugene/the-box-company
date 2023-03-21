@@ -11,13 +11,14 @@ get_header()
         $featured_posts = get_field('projects_show_in_top');
         $mainTitle = get_field('projects_title');
 
-        if ($featured_posts) {
+        if ($featured_posts) :
 
-            foreach ($featured_posts as $post) {
+            foreach ($featured_posts as $element) :
 
-                $title = get_the_title();
-                $image = get_field('image');
-                $slogan = get_field('slogan');
+                $id = $element->ID;
+                $title = $element->post_title;
+                $image = get_field('image', $id);
+                $slogan = get_field('slogan', $id);
         ?>
                 <div class="slider-one-element" data-title="<?php echo $title ?>" data-link="<?php the_permalink() ?>" style="background-image: url('<?php echo $image['url']; ?>');>">
 
@@ -31,11 +32,9 @@ get_header()
                     </div>
                 </div>
 
-            <?php } ?>
-
         <?php
-            wp_reset_postdata();
-        }
+            endforeach;
+        endif;
         ?>
 
         <div class="slider-one-nav">
@@ -66,31 +65,30 @@ get_header()
             <div class="section-two-articles-container">
 
                 <?php
-                if (have_rows('our_reputations')) {
 
-                    while (have_rows('our_reputations')) {
-                        the_row();
+                $array = get_field('our_reputations');
 
-                        $image = get_sub_field('image');
-                        $title = get_sub_field('title');
-                        $description = get_sub_field('description');
+                if ($array) :
+                    foreach ($array as $element) :
+
+                        $title = $element['title'];
+                        $image = $element['image'];
+                        $description = $element['description'];
                 ?>
                         <div class="section-two-article">
                             <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" title="<?php echo $image['title']; ?>">
                             <h3><?php echo $title ?></h3>
                             <p><?php echo $description ?></p>
-
                         </div>
                 <?php
-                    }
-                }
+                    endforeach;
+                endif;
                 ?>
 
             </div>
         </div>
     </div>
 </section>
-
 
 <section class="section-three" id="about-us">
     <div class="container">
@@ -125,32 +123,27 @@ get_header()
             <div class="section-four-content-grid">
                 <?php
 
-                $args = array(
+                $services = get_posts(array(
                     'post_type' => 'services',
-                    'posts_per_page' => -1,
-                    'orderby' => 'menu_order',
-                    'order' => 'ASC'
-                );
+                    'posts_per_page' => -1
+                ));
 
-                $services = new WP_Query($args);
+                if ($services) :
 
-                while ($services->have_posts()) {
+                    foreach ($services as $element) :
 
-                    $services->the_post();
-
-                    // $post_id = get_the_ID();
-                    $image = get_field('image');
+                        $id = $element->ID;
+                        $image = get_field('image', $id);
                 ?>
-
-                    <div class="section-four-article">
-                        <div class="section-four-container">
-                            <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" title="<?php echo $image['title']; ?>">
+                        <div class="section-four-article">
+                            <div class="section-four-container">
+                                <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" title="<?php echo $image['title']; ?>">
+                            </div>
+                            <h3> <?php the_title(); ?> </h3>
                         </div>
-                        <h3> <?php the_title(); ?> </h3>
-                    </div>
                 <?php
-                }
-                wp_reset_postdata();
+                    endforeach;
+                endif
                 ?>
 
             </div>
@@ -159,9 +152,7 @@ get_header()
 </section>
 
 <section class="section-five">
-
     <div class="container">
-
         <div class="section-five-content">
 
             <?php $field = get_field('our_goals'); ?>
@@ -206,9 +197,6 @@ get_header()
         </div>
     </div>
 
-
-
-
 </section>
 
 <?php
@@ -236,7 +224,6 @@ $banner = get_field('consultation_banner');
 
 <section class="section-seven" id="projects">
     <div class="container">
-
 
         <?php
         $title = get_field('all_projects_title');
@@ -278,46 +265,43 @@ $banner = get_field('consultation_banner');
                 <div class="slider-two projects-block-slides-container">
 
                     <?php
-
-                    $args = array(
+                    $projects = get_posts(array(
                         'post_type' => 'projects',
-                        'posts_per_page' => -1,
-                        // 'orderby' => 'menu_order',
-                        'order' => 'ASC'
-                    );
+                        'posts_per_page' => -1
+                    ));
 
-                    $projects = new WP_Query($args);
+                    if ($projects) :
 
-                    while ($projects->have_posts()) {
+                        foreach ($projects as $element) :
 
-                        $projects->the_post();
-
-                        $location = get_field('location');
-                        $title = get_the_title();
-                        $post_categories = get_the_category();
+                            $id = $element->ID;
+                            $title = $element->post_title;
+                            $thumbnail = get_the_post_thumbnail($id);
+                            $post_categories = get_the_category($id);
+                            $location = get_field('location', $id);
 
 
-                        if (has_post_thumbnail()) : ?>
+                            if ($post_categories) :
 
-                            <?php
+                                $slugs = '';
 
-                            $slugs = '';
+                                foreach ($post_categories as $category) :
+                                    $slug = $category->slug;
 
-                            foreach ($post_categories as $category) {
-                                $slug = $category->slug;
+                                    if ($category == $post_categories[0]) {
+                                        $slugs .= $slug;
+                                    } else {
+                                        $slugs .= " ";
+                                        $slugs .= $slug;
+                                    }
 
-                                if ($category == $post_categories[0]) {
-                                    $slugs .= $slug;
-                                } else {
-                                    $slugs .= " ";
-                                    $slugs .= $slug;
-                                }
-                            }
-                            ?>
+                                endforeach;
+                            endif;
+                    ?>
 
                             <div class="projects-block-element <?php echo $slugs ?>" data-filter="<?php echo $slugs ?>">
                                 <div class="projects-block-element-image">
-                                    <?php the_post_thumbnail(); ?>
+                                    <?php echo $thumbnail ?>
                                 </div>
                                 <div class="projects-block-element-description">
                                     <h4><?php echo $title ?></h4>
@@ -326,16 +310,12 @@ $banner = get_field('consultation_banner');
                                 </div>
                             </div>
 
-
-                        <?php endif ?>
                     <?php
-                    }
-                    wp_reset_postdata();
+                        endforeach;
+                    endif;
                     ?>
 
                 </div>
-
-
 
                 <div class="slider-two-nav-buttons">
                     <button class="slider-two-nav-button pointer slide-prev2 slick-arrow" aria-label="Previous" type="button" style="">
@@ -347,7 +327,6 @@ $banner = get_field('consultation_banner');
                         <img class="right-arrow" src="<?php echo get_theme_file_uri() . '/images/right_arrow.svg' ?>" title="" alt="">
                     </button>
                 </div>
-
 
             </div>
         </div>
@@ -379,8 +358,6 @@ $banner = get_field('consultation_banner');
 </section>
 
 
-
 <?php
 get_footer();
 ?>
-
