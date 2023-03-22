@@ -69,7 +69,7 @@ jQuery(document).ready(function ($) {
             slidesPerRow: 2,
             rows: 2,
             slidesToScroll: 1,
-            // touchMove: false,
+            touchMove: false,
             swipe: false,
             responsive: [
                 {
