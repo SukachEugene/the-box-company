@@ -64,14 +64,6 @@ function selectPlaceholderStyling() {
 }
 
 
-// document.ready = defeatNumberofElementsByClass('section-five-article');
-
-// function defeatNumberofElementsByClass(className) {
-//   let elements = document.getElementsByClassName(className);
-//   console.log(elements.length)
-//   return elements.length;
-// }
-
 
 
 
